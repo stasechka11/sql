@@ -19,5 +19,13 @@ public class VerificationPage {
         errorNotification.shouldHave(Condition.exactText(expectedText)).shouldBe(visible);
     }
 
+    public DashboardPage validVerify(String verificationCode) {
+        verify(verificationCode);
+        return new DashboardPage();
+    }
 
+    public void verify(String verificationCode) {
+        codeField.setValue(verificationCode);
+        verifyButton.click();
+    }
 }
