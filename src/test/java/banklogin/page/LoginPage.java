@@ -1,5 +1,6 @@
 package banklogin.page;
 
+import banklogin.data.DataHelper;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
 
@@ -16,5 +17,11 @@ public class LoginPage {
         errorNotification.shouldHave(Condition.exactText(expectedText)).shouldBe(visible);
     }
 
+    public VerificationPage validLogin(DataHelper.AuthInfo info) {
+        loginField.setValue(info.getLogin());
+        passwordField.setValue(info.getPassword());
+        loginButton.click();
+        return new VerificationPage();
+    }
 
 }
