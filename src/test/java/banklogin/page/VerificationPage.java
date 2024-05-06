@@ -11,7 +11,7 @@ public class VerificationPage {
     private final SelenideElement verifyButton = $("[data-test-id='action-verify']");
     private final SelenideElement errorNotification = $("[data-test-id='error-notification'] .notification__content");
 
-    public void verifyVerificationPageVisibility() {
+    public VerificationPage() {
         codeField.shouldBe(visible);
     }
 
