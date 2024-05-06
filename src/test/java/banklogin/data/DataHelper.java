@@ -23,11 +23,11 @@ public class DataHelper {
         return FAKER.internet().password();
     }
 
-    private static AuthInfo generateRandomUser() {
+    public static AuthInfo generateRandomUser() {
         return new AuthInfo(generateRandomLogin(), generateRandomPassword());
     }
 
-    public static VerificationCode generateVerificationCode() {
+    public static VerificationCode generateRandomVerificationCode() {
         return new VerificationCode(FAKER.numerify("######"));
     }
 

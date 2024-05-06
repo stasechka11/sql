@@ -43,9 +43,27 @@ public class BankLoginTest {
     void shouldSuccessLogin() {
         var authInfo = DataHelper.getAuthInfo();
         var verificationPage = loginPage.validLogin(authInfo);
+        verificationPage.verifyVerificationPageVisibility();
         var verificationCode = SQLHelper.getVerificationCode();
         verificationPage.validVerify(verificationCode.getCode());
     }
 
+    @Test
+    @DisplayName("Should get error notification when login with not existing in db user")
+    void shouldGetErrorLoginNotExistingUser() {
+        var authInfo = DataHelper.generateRandomUser();
+        loginPage.validLogin(authInfo);
+        loginPage.verifyErrorNotification("Ошибка! \nНеверно указан логин или пароль");
+    }
 
+    @Test
+    @DisplayName("Should get error notification when login with not existing in db user")
+    void shouldGetErrorLoginExistingUserInvalidCode() {
+        var authInfo = DataHelper.getAuthInfo();
+        var verificationPage = loginPage.validLogin(authInfo);
+        verificationPage.verifyVerificationPageVisibility();
+        var verificationCode = DataHelper.generateRandomVerificationCode();
+        verificationPage.verify(verificationCode.getCode());
+        verificationPage.verifyErrorNotification("Ошибка! \nНеверно указан код! Попробуйте ещё раз.");
+    }
 }
